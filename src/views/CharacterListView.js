@@ -19,26 +19,35 @@ class CharacterListView extends React.Component {
     if (this.props.fetching) {
       console.log("currently fetching data")
       // return something here to indicate that you are fetching data
-    }
+    } 
+  
     return (
-      <div className="CharactersList_wrapper">
-        <CharacterList characters={this.props.characters} />
+
+      <div>
+        {this.props.characters && (
+          <div className="CharactersList_wrapper">
+            <CharacterList characters={this.props.characters} />
+          </div>
+          )}
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = state => ({
-  characters : state.characters,
-  fetching : state.fetching,
-})
 
-// our mapStateToProps needs to have two properties inherited from state
-// the characters and the fetching boolean
-export default connect(
-  mapStateToProps, /* mapStateToProps replaces null here */
-  {
-    fetchingData
-    /* action creators go here */
-  }
-)(CharacterListView);
+
+
+  const mapStateToProps = state => ({
+    characters: state.charsReducer.characters,
+    fetching: state.charsReducer.fetching,
+  })
+
+  // our mapStateToProps needs to have two properties inherited from state
+  // the characters and the fetching boolean
+  export default connect(
+    mapStateToProps, /* mapStateToProps replaces null here */
+    {
+      fetchingData
+      /* action creators go here */
+    }
+  )(CharacterListView);

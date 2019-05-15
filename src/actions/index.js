@@ -17,6 +17,7 @@ const fetchingData = () => dispatch => {
     axios
     .get("https://swapi.co/api/people/")
     .then( res => {
+        console.log(res.data.results)
         dispatch({
             type : FETCHING_SUCCESS,
             payload : res.data.results
